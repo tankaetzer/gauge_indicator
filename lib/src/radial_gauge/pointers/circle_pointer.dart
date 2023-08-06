@@ -8,13 +8,13 @@ class CirclePointer extends Equatable implements GaugePointer {
   @override
   final GaugePointerPosition position;
   @override
-  final Color? color;
+  final Color color;
   @override
-  final GaugePointerBorder? border;
+  final GaugePointerBorder border;
   @override
-  final Gradient? gradient;
+  final Gradient gradient;
   @override
-  final Shadow? shadow;
+  final Shadow shadow;
 
   @override
   Size get size => Size.fromRadius(radius);
@@ -26,7 +26,7 @@ class CirclePointer extends Equatable implements GaugePointer {
     ));
 
   const CirclePointer({
-    required this.radius,
+    @required this.radius,
     this.color,
     this.position = const GaugePointerPosition.surface(),
     this.border,
@@ -39,5 +39,5 @@ class CirclePointer extends Equatable implements GaugePointer {
         );
 
   @override
-  List<Object?> get props => [size, color, border, position, gradient, shadow];
+  List<Object> get props => [size, color, border, position, gradient, shadow];
 }

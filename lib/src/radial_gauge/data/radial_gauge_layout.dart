@@ -31,10 +31,10 @@ class RadialGaugeLayout {
   final double radius;
 
   RadialGaugeLayout({
-    required this.circleRect,
-    required this.targetRect,
-    required this.sourceRect,
-    required this.radius,
+    @required this.circleRect,
+    @required this.targetRect,
+    @required this.sourceRect,
+    @required this.radius,
   });
 
   /// Calculate the layout based on the [size], [ratios] and
@@ -42,10 +42,10 @@ class RadialGaugeLayout {
   factory RadialGaugeLayout.calculate(
     BoxConstraints constraints,
     RadialGaugeSizeRatios ratios, {
-    double? preferredRadius,
+    double preferredRadius,
     Alignment alignment = Alignment.center,
   }) {
-    Size? preferredSize;
+    Size preferredSize;
     if (preferredRadius != null) {
       preferredSize = ratios.getSize(preferredRadius);
       // Gauge can be fitted in the provided constraints
@@ -81,7 +81,7 @@ class RadialGaugeLayout {
       }
     }
 
-    final Size sourceSize;
+    Size sourceSize;
     if (constraints.isTight) {
       sourceSize = constraints.smallest;
     } else if (constraints.hasTightHeight) {
@@ -108,7 +108,7 @@ class RadialGaugeLayout {
       );
     }
 
-    final Size targetSize;
+    Size targetSize;
     if (preferredRadius != null) {
       final preferredSize2 = ratios.getSize(preferredRadius);
       final preferredRect = Offset.zero & preferredSize2;

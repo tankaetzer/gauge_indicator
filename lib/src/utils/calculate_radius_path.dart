@@ -8,12 +8,12 @@ import 'package:gauge_indicator/gauge_indicator.dart';
 /// the vertices of the arc will be drawn
 Path calculateRadiusArcPath(
   Rect rect, {
-  required Radius cornerRadius,
+  @required Radius cornerRadius,
   double from = 0.0,
   double to = 1.0,
   double degrees = 180.0,
   double thickness = 10.0,
-  Canvas? canvas,
+  Canvas canvas,
 }) {
   assert(from <= to, 'Cannot draw inverted arc.');
 

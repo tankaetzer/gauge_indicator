@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:math' as math;
 
@@ -27,8 +28,8 @@ class RadialGaugeSizeRatios {
   Size getSize(double radius) => Size(radius * 2, getHeight(radius * 2));
 
   const RadialGaugeSizeRatios({
-    required this.aspectRatio,
-    required this.radiusFactor,
+    @required this.aspectRatio,
+    @required this.radiusFactor,
   });
 
   /// Calculate gauge indicator ratios.

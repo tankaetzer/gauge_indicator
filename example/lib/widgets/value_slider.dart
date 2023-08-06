@@ -4,18 +4,18 @@ class ValueSlider extends StatelessWidget {
   final String label;
   final double value;
   final ValueChanged<double> onChanged;
-  final ValueChanged<double>? onChangeEnd;
+  final ValueChanged<double> onChangeEnd;
   final double min;
   final double max;
 
   const ValueSlider({
-    Key? key,
-    required this.label,
-    required this.onChanged,
+    Key key,
+    @required this.label,
+    @required this.onChanged,
     this.onChangeEnd,
-    required this.value,
-    required this.min,
-    required this.max,
+    @required this.value,
+    @required this.min,
+    @required this.max,
   }) : super(key: key);
 
   @override

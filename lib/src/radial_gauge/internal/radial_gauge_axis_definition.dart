@@ -6,20 +6,20 @@ import 'package:gauge_indicator/gauge_indicator.dart';
 class GaugeSegmentDefinition {
   final double startAngle;
   final double sweepAngle;
-  final Color? color;
-  final GaugeAxisGradient? gradient;
-  final GaugeBorder? border;
-  final Shader? shader;
+  final Color color;
+  final GaugeAxisGradient gradient;
+  final GaugeBorder border;
+  final Shader shader;
   final Path path;
 
   GaugeSegmentDefinition({
-    required this.startAngle,
-    required this.sweepAngle,
-    required this.path,
-    required this.color,
-    required this.gradient,
-    required this.border,
-    required this.shader,
+    @required this.startAngle,
+    @required this.sweepAngle,
+    @required this.path,
+    @required this.color,
+    @required this.gradient,
+    @required this.border,
+    @required this.shader,
   });
 }
 
@@ -40,10 +40,10 @@ class RadialGaugeAxisDefinition {
   }
 
   RadialGaugeAxisDefinition({
-    required this.surface,
-    required this.rect,
-    required this.segments,
-    required this.thickness,
+    @required this.surface,
+    @required this.rect,
+    @required this.segments,
+    @required this.thickness,
   });
 
   RadialGaugeAxisDefinition shift(Offset offset) => RadialGaugeAxisDefinition(
@@ -60,14 +60,15 @@ class RadialGaugeAxisDefinition {
     final thickness = axis.style.thickness;
     final halfThickness = thickness / 2;
 
-    final cornerRadius = axis.style.cornerRadius.clampValues(
-      minimumX: 0,
-      minimumY: 0,
-      maximumX: halfThickness,
-      maximumY: halfThickness,
-    );
+    final cornerRadius = clampValues(
+        minimumX: 0,
+        minimumY: 0,
+        maximumX: halfThickness,
+        maximumY: halfThickness,
+        x: axis.style.cornerRadius.x,
+        y: axis.style.cornerRadius.y);
 
-    final Path axisSurface;
+    Path axisSurface;
     if (cornerRadius == Radius.zero) {
       axisSurface = calculateAxisPath(
         layout.circleRect,
@@ -159,11 +160,13 @@ class RadialGaugeAxisDefinition {
 
       final path = calculateRadiusArcPath(
         externalRect,
-        cornerRadius: segment.cornerRadius.clampValues(
+        cornerRadius: clampValues(
           minimumX: 0,
           minimumY: 0,
           maximumX: halfThickness,
           maximumY: halfThickness,
+          x: segment.cornerRadius.x,
+          y: segment.cornerRadius.y,
         ),
         degrees: axis.degrees,
         from: math.min(clampedFrom, clampedTo),
@@ -181,5 +184,33 @@ class RadialGaugeAxisDefinition {
         path: path,
       );
     }
+  }
+
+  static Radius clampValues({
+    double minimumX,
+    double minimumY,
+    double maximumX,
+    double maximumY,
+    @required double x,
+    @required double y,
+  }) {
+    return Radius.elliptical(
+      clampDouble(x, minimumX ?? -double.infinity, maximumX ?? double.infinity),
+      clampDouble(y, minimumY ?? -double.infinity, maximumY ?? double.infinity),
+    );
+  }
+
+  static double clampDouble(double x, double min, double max) {
+    assert(min <= max && !max.isNaN && !min.isNaN);
+    if (x < min) {
+      return min;
+    }
+    if (x > max) {
+      return max;
+    }
+    if (x.isNaN) {
+      return max;
+    }
+    return x;
   }
 }

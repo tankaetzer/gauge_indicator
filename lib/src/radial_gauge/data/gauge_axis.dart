@@ -11,7 +11,7 @@ class GaugeAxisStyle extends Equatable {
 
   /// Corner radius of the axis core segment
   final Radius cornerRadius;
-  final Color? background;
+  final Color background;
 
   /// Whether to blend the colors of the segments.
   final bool blendColors;
@@ -34,20 +34,20 @@ class GaugeAxisStyle extends Equatable {
         background: Color.lerp(begin.background, end.background, t),
         blendColors: end.blendColors,
         segmentSpacing: lerpDouble(begin.segmentSpacing, end.segmentSpacing, t),
-        cornerRadius: Radius.lerp(begin.cornerRadius, end.cornerRadius, t)!,
+        cornerRadius: Radius.lerp(begin.cornerRadius, end.cornerRadius, t),
       );
 
   @override
-  List<Object?> get props =>
+  List<Object> get props =>
       [thickness, segmentSpacing, background, blendColors];
 }
 
-class GaugeAxisTween extends Tween<GaugeAxis?> {
-  GaugeAxisTween({GaugeAxis? begin, GaugeAxis? end})
+class GaugeAxisTween extends Tween<GaugeAxis> {
+  GaugeAxisTween({GaugeAxis begin, GaugeAxis end})
       : super(begin: begin, end: end);
 
   @override
-  GaugeAxis? lerp(double t) => GaugeAxis.lerp(begin, end, t);
+  GaugeAxis lerp(double t) => GaugeAxis.lerp(begin, end, t);
 }
 
 @immutable
@@ -57,7 +57,7 @@ class GaugeAxis extends Equatable {
   ///
   /// Defaults to [defaultPointer].
   /// ```
-  final GaugePointer? pointer;
+  final GaugePointer pointer;
 
   /// The minimum value the gauge can display.
   ///
@@ -87,7 +87,7 @@ class GaugeAxis extends Equatable {
   /// the segments.
   final GaugeAxisTransformer transformer;
 
-  final GaugeProgressBar? progressBar;
+  final GaugeProgressBar progressBar;
 
   /// Segments to be drawn on the gauge axis.
   final List<GaugeSegment> segments;
@@ -124,22 +124,22 @@ class GaugeAxis extends Equatable {
         );
 
   GaugeAxis transform({
-    required GaugeRange range,
-    required double progress,
-    required double value,
-    required bool isInitial,
+    @required GaugeRange range,
+    @required double progress,
+    @required double value,
+    @required bool isInitial,
   }) =>
       transformer.transform(this, range, progress, value, isInitial);
 
   GaugeAxis copyWith({
-    final GaugeAxisStyle? style,
-    final List<GaugeSegment>? segments,
-    final GaugePointer? pointer,
-    final GaugeProgressBar? progressBar,
-    final GaugeAxisTransformer? transformer,
-    final double? degrees,
-    final double? min,
-    final double? max,
+    final GaugeAxisStyle style,
+    final List<GaugeSegment> segments,
+    final GaugePointer pointer,
+    final GaugeProgressBar progressBar,
+    final GaugeAxisTransformer transformer,
+    final double degrees,
+    final double min,
+    final double max,
   }) =>
       GaugeAxis(
         min: min ?? this.min,
@@ -160,9 +160,9 @@ class GaugeAxis extends Equatable {
       );
 
   @override
-  List<Object?> get props => [pointer, style, segments, degrees, progressBar];
+  List<Object> get props => [pointer, style, segments, degrees, progressBar];
 
-  static GaugeAxis? lerp(GaugeAxis? begin, GaugeAxis? end, double t) {
+  static GaugeAxis lerp(GaugeAxis begin, GaugeAxis end, double t) {
     if (begin == null && end == null) {
       return null;
     } else if (begin == null) {
@@ -170,7 +170,7 @@ class GaugeAxis extends Equatable {
     } else if (end == null) {
       return begin;
     } else {
-      late final List<GaugeSegment> transformedSegments;
+      List<GaugeSegment> transformedSegments;
       if (t == 1.0) {
         transformedSegments = end.segments;
       } else if (t == 0.0) {
@@ -186,8 +186,8 @@ class GaugeAxis extends Equatable {
 
             /// One segment is always present.
             return GaugeSegment.lerp(
-              beginSegment ?? endSegment!.copyWith(from: endSegment.to),
-              endSegment ?? beginSegment!.copyWith(to: beginSegment.from),
+              beginSegment ?? endSegment.copyWith(from: endSegment.to),
+              endSegment ?? beginSegment.copyWith(to: beginSegment.from),
               t,
             );
           },

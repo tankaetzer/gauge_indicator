@@ -4,7 +4,7 @@ import 'package:gauge_indicator/gauge_indicator.dart';
 
 typedef GaugeLabelBuilder = Widget Function(
   BuildContext context,
-  Widget? child,
+  Widget child,
   double value,
 );
 
@@ -16,15 +16,15 @@ class AnimatedRadialGauge extends ImplicitlyAnimatedWidget {
   final GaugeAxis axis;
   final Alignment alignment;
   final bool debug;
-  final double? radius;
-  final Widget? child;
-  final GaugeLabelBuilder? builder;
+  final double radius;
+  final Widget child;
+  final GaugeLabelBuilder builder;
 
   const AnimatedRadialGauge({
-    Key? key,
+    Key key,
     this.initialValue = 0.0,
-    required Duration duration,
-    required this.value,
+    @required Duration duration,
+    @required this.value,
     this.builder,
     this.axis = const GaugeAxis(),
     Curve curve = Curves.linear,
@@ -32,7 +32,7 @@ class AnimatedRadialGauge extends ImplicitlyAnimatedWidget {
     this.radius,
     this.debug = false,
     this.child,
-    VoidCallback? onEnd,
+    VoidCallback onEnd,
   }) : super(
           key: key,
           duration: duration,
@@ -49,9 +49,9 @@ class _AnimatedRadialGaugeState
     extends AnimatedWidgetBaseState<AnimatedRadialGauge> {
   bool _isInitialAnimation = true;
 
-  Tween<double>? _valueTween;
-  Tween<double?>? _radiusTween;
-  GaugeAxisTween? _axisTween;
+  Tween<double> _valueTween;
+  Tween<double> _radiusTween;
+  GaugeAxisTween _axisTween;
 
   @override
   void initState() {
@@ -88,11 +88,11 @@ class _AnimatedRadialGaugeState
         : visitor(
             _radiusTween,
             widget.radius,
-            (dynamic value) => Tween<double?>(
+            (dynamic value) => Tween<double>(
               begin: value,
               end: value,
             ),
-          ) as Tween<double?>;
+          ) as Tween<double>;
   }
 
   @override
@@ -100,13 +100,13 @@ class _AnimatedRadialGaugeState
     return RepaintBoundary(
       child: Builder(
         builder: (context) {
-          final value = _valueTween!.evaluate(animation).clamp(
+          final value = _valueTween.evaluate(animation).clamp(
                 widget.axis.min,
                 widget.axis.max,
               );
 
-          final radius = _radiusTween!.evaluate(animation);
-          final computedAxis = _axisTween!.evaluate(animation)!.flatten();
+          final radius = _radiusTween.evaluate(animation);
+          final computedAxis = _axisTween.evaluate(animation).flatten();
 
           final axis = computedAxis.transform(
             range: GaugeRange(widget.axis.min, widget.axis.max),

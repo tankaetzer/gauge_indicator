@@ -9,14 +9,14 @@ class NeedlePointer extends Equatable implements GaugePointer {
   @override
   final GaugePointerPosition position;
   @override
-  final Color? color;
+  final Color color;
   @override
-  final GaugePointerBorder? border;
+  final GaugePointerBorder border;
   final double borderRadius;
   @override
-  final Gradient? gradient;
+  final Gradient gradient;
   @override
-  final Shadow? shadow;
+  final Shadow shadow;
 
   @override
   Size get size => Size(width, height);
@@ -28,12 +28,12 @@ class NeedlePointer extends Equatable implements GaugePointer {
       ], borderRadius);
 
   const NeedlePointer({
-    required this.width,
-    required this.height,
+    @required this.width,
+    @required this.height,
     this.color,
     this.position = const GaugePointerPosition.center(),
     this.border,
-    double? borderRadius,
+    double borderRadius,
     this.gradient,
     this.shadow,
   })  : borderRadius = borderRadius ?? width / 2,
@@ -43,5 +43,5 @@ class NeedlePointer extends Equatable implements GaugePointer {
             'Either color or gradient must be provided.');
 
   @override
-  List<Object?> get props => [size, color, border, position, borderRadius];
+  List<Object> get props => [size, color, border, position, borderRadius];
 }

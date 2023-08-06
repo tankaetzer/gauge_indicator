@@ -1,6 +1,7 @@
 import 'package:example/widgets/color_picker.dart';
 import 'package:example/widgets/package_title.dart';
 import 'package:example/widgets/value_slider.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
 
@@ -9,7 +10,7 @@ import 'dart:math' as math;
 import 'gauge_data_controller.dart';
 
 class RadialGaugeExamplePage extends StatefulWidget {
-  const RadialGaugeExamplePage({Key? key}) : super(key: key);
+  const RadialGaugeExamplePage({Key key}) : super(key: key);
 
   @override
   State<RadialGaugeExamplePage> createState() => _RadialGaugeExamplePageState();
@@ -20,7 +21,7 @@ class _RadialGaugeExamplePageState extends State<RadialGaugeExamplePage> {
 
   @override
   Widget build(BuildContext context) {
-    final viewSize = MediaQuery.sizeOf(context);
+    final viewSize = MediaQuery.of(context).size;
     final isMobile = viewSize.width < 700;
 
     return Scaffold(
@@ -139,8 +140,8 @@ class GaugeConfigPanel extends StatelessWidget {
   final GaugeDataController _controller;
 
   const GaugeConfigPanel({
-    Key? key,
-    required GaugeDataController controller,
+    Key key,
+    @required GaugeDataController controller,
   })  : _controller = controller,
         super(key: key);
 
@@ -272,7 +273,7 @@ class GaugeConfigPanel extends StatelessWidget {
                 items: [
                   for (final val in GaugeProgressPlacement.values)
                     DropdownMenuItem(
-                      child: Text("Placement: ${val.name}"),
+                      child: Text("Placement: ${describeEnum(val)}"),
                       value: val,
                     )
                 ],
@@ -290,7 +291,7 @@ class GaugeConfigPanel extends StatelessWidget {
                 items: [
                   for (final val in ProgressBarType.values)
                     DropdownMenuItem(
-                      child: Text("Type: ${val.name}"),
+                      child: Text("Type: ${describeEnum(val)}"),
                       value: val,
                     )
                 ],
@@ -323,7 +324,7 @@ class GaugeConfigPanel extends StatelessWidget {
                 items: [
                   for (final val in PointerType.values)
                     DropdownMenuItem(
-                      child: Text("Type: ${val.name}"),
+                      child: Text("Type: ${describeEnum(val)}"),
                       value: val,
                     )
                 ],

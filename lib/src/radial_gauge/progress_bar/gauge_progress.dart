@@ -27,17 +27,17 @@ abstract class GaugeProgressBar {
 
   /// A progress bar that is rounded at both ends
   const factory GaugeProgressBar.rounded({
-    Color? color,
-    GaugeAxisGradient? gradient,
-    Shader? shader,
+    Color color,
+    GaugeAxisGradient gradient,
+    Shader shader,
     GaugeProgressPlacement placement,
   }) = GaugeRoundedProgressBar;
 
   /// A basic progress bar with no rounding at the ends
   const factory GaugeProgressBar.basic({
-    Color? color,
-    GaugeAxisGradient? gradient,
-    Shader? shader,
+    Color color,
+    GaugeAxisGradient gradient,
+    Shader shader,
     GaugeProgressPlacement placement,
   }) = GaugeBasicProgressBar;
 }

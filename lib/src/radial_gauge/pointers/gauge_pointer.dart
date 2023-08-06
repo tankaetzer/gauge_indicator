@@ -55,7 +55,7 @@ class GaugePointerPosition extends Equatable {
   }) : anchor = GaugePointerAnchor.surface;
 
   @override
-  List<Object?> get props => [anchor, offset];
+  List<Object> get props => [anchor, offset];
 }
 
 @immutable
@@ -64,12 +64,12 @@ class GaugePointerBorder extends Equatable {
   final double width;
 
   const GaugePointerBorder({
-    required this.color,
-    required this.width,
+    @required this.color,
+    @required this.width,
   }) : assert(width > 0, 'Width must be larger than 0.');
 
   @override
-  List<Object?> get props => [color, width];
+  List<Object> get props => [color, width];
 }
 
 @immutable
@@ -79,46 +79,46 @@ abstract class GaugePointer {
   GaugePointerPosition get position;
 
   /// Either color or gradient must be provided.
-  Color? get color;
-  Gradient? get gradient;
+  Color get color;
+  Gradient get gradient;
 
   /// When null, the pointer shadow will not be rendered.
-  Shadow? get shadow;
+  Shadow get shadow;
 
   /// When null, the pointer border will not be rendered.
-  GaugePointerBorder? get border;
+  GaugePointerBorder get border;
 
   /// Draws a needle pointer.
   const factory GaugePointer.needle({
-    required double width,
-    required double height,
-    required Color color,
+    @required double width,
+    @required double height,
+    @required Color color,
     GaugePointerPosition position,
-    GaugePointerBorder? border,
-    double? borderRadius,
-    Gradient? gradient,
-    Shadow? shadow,
+    GaugePointerBorder border,
+    double borderRadius,
+    Gradient gradient,
+    Shadow shadow,
   }) = NeedlePointer;
 
   /// Draws a circle pointer.
   const factory GaugePointer.circle({
-    required double radius,
-    Color? color,
+    @required double radius,
+    Color color,
     GaugePointerPosition position,
-    GaugePointerBorder? border,
-    Gradient? gradient,
-    Shadow? shadow,
+    GaugePointerBorder border,
+    Gradient gradient,
+    Shadow shadow,
   }) = CirclePointer;
 
   /// Draws a triangle pointer.
   const factory GaugePointer.triangle({
-    required double width,
-    required double height,
-    Color? color,
+    @required double width,
+    @required double height,
+    Color color,
     GaugePointerPosition position,
-    GaugePointerBorder? border,
+    GaugePointerBorder border,
     double borderRadius,
-    Gradient? gradient,
-    Shadow? shadow,
+    Gradient gradient,
+    Shadow shadow,
   }) = TrianglePointer;
 }

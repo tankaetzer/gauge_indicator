@@ -52,9 +52,9 @@ class RadialGaugeRenderBox extends RenderShiftedBox {
     }
   }
 
-  double? _radius;
-  double? get radius => _radius;
-  set radius(double? radius) {
+  double _radius;
+  double get radius => _radius;
+  set radius(double radius) {
     if (_radius != radius) {
       _radius = radius;
       markNeedsLayout();
@@ -70,17 +70,17 @@ class RadialGaugeRenderBox extends RenderShiftedBox {
     }
   }
 
-  late RadialGaugeLayout _computedLayout;
-  late RadialGaugeAxisDefinition _axisDefinition;
+  RadialGaugeLayout _computedLayout;
+  RadialGaugeAxisDefinition _axisDefinition;
 
   /// Creates a RenderBox that displays a radial gauge.
   RadialGaugeRenderBox({
-    required final double value,
-    required final GaugeAxis axis,
-    required final Alignment alignment,
-    required final bool debug,
-    required final double? radius,
-    RenderBox? child,
+    @required final double value,
+    @required final GaugeAxis axis,
+    @required final Alignment alignment,
+    @required final bool debug,
+    @required final double radius,
+    RenderBox child,
   })  : _value = value,
         _axis = axis,
         _alignment = alignment,
@@ -117,9 +117,9 @@ class RadialGaugeRenderBox extends RenderShiftedBox {
       );
       final childRect = circleRect.intersect(_computedLayout.targetRect);
 
-      child!.layout(BoxConstraints.tight(childRect.size));
+      child.layout(BoxConstraints.tight(childRect.size));
 
-      final childParentData = child!.parentData! as BoxParentData;
+      final childParentData = child.parentData as BoxParentData;
       childParentData.offset = Offset(
         childRect.left - _computedLayout.sourceRect.left,
         childRect.top - _computedLayout.sourceRect.top,
@@ -168,7 +168,7 @@ class RadialGaugeRenderBox extends RenderShiftedBox {
 
     if (axis.style.background != null) {
       final paint = Paint()
-        ..color = axis.style.background!
+        ..color = axis.style.background
         ..style = PaintingStyle.fill;
       canvas.drawPath(axisDefinition.surface, paint);
     }
@@ -195,9 +195,9 @@ class RadialGaugeRenderBox extends RenderShiftedBox {
       final paint = Paint()..style = PaintingStyle.fill;
 
       if (segment.shader != null) {
-        paint.shader = segment.shader!;
+        paint.shader = segment.shader;
       } else if (segment.gradient != null) {
-        final gradient = segment.gradient!;
+        final gradient = segment.gradient;
         paint.shader = ui.Gradient.sweep(
           layout.circleRect.center,
           gradient.colors,
@@ -210,7 +210,7 @@ class RadialGaugeRenderBox extends RenderShiftedBox {
               .storage,
         );
       } else if (segment.color != null) {
-        paint.color = segment.color!;
+        paint.color = segment.color;
       }
 
       canvas.drawPath(segment.path, paint);
@@ -260,7 +260,7 @@ class RadialGaugeRenderBox extends RenderShiftedBox {
     final offset = pointer.position.offset;
     final size = pointer.size;
 
-    final double originDY;
+    double originDY;
     switch (pointer.position.anchor) {
       case GaugePointerAnchor.center:
         originDY = size.height - offset.dy;
@@ -291,15 +291,15 @@ class RadialGaugeRenderBox extends RenderShiftedBox {
     final fillPaint = Paint();
 
     if (pointer.shadow != null) {
-      canvas.drawPath(path, pointer.shadow!.toPaint());
+      canvas.drawPath(path, pointer.shadow.toPaint());
     }
 
     if (pointer.color != null) {
-      fillPaint.color = pointer.color!;
+      fillPaint.color = pointer.color;
     }
 
     if (pointer.gradient != null) {
-      fillPaint.shader = pointer.gradient!.createShader(path.getBounds());
+      fillPaint.shader = pointer.gradient.createShader(path.getBounds());
     }
 
     fillPaint.style = PaintingStyle.fill;

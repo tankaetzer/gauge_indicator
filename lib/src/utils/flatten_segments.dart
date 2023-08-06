@@ -35,7 +35,7 @@ Iterable<GaugeSegment> flattenSegments(
             .fold<HSVColor>(
                 HSVColor.fromColor(includedSegments.first.color),
                 (val, next) =>
-                    HSVColor.lerp(val, HSVColor.fromColor(next.color), 0.5)!)
+                    HSVColor.lerp(val, HSVColor.fromColor(next.color), 0.5))
             .toColor()
         : lastSegment.color;
 

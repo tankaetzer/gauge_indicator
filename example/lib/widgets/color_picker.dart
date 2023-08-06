@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-Future<Color?> pickColor(BuildContext context, Color initialColor) {
+Future<Color> pickColor(BuildContext context, Color initialColor) {
   Color color = initialColor;
   return showDialog<Color>(
     context: context,
     builder: (context) => AlertDialog(
       title: const Text('Pick a color'),
-      content: SingleChildScrollView(
-        child: ColorPicker(
-          pickerColor: color,
-          onColorChanged: (c) => color = c,
-        ),
-      ),
+      content: const Text('Pick A color'),
       actions: <Widget>[
         ElevatedButton(
           child: const Text('Select'),
@@ -31,10 +25,10 @@ class ColorField extends StatelessWidget {
   final ValueChanged<Color> onColorChanged;
 
   const ColorField({
-    Key? key,
-    required this.title,
-    required this.color,
-    required this.onColorChanged,
+    Key key,
+    @required this.title,
+    @required this.color,
+    @required this.onColorChanged,
   }) : super(key: key);
 
   @override

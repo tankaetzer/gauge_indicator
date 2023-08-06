@@ -4,7 +4,7 @@ import 'dart:ui';
 class VertexDefinition {
   final double x;
   final double y;
-  final double? radius;
+  final double radius;
 
   final double distance;
 
@@ -36,7 +36,7 @@ Path roundedPoly(
   double radiusAll,
 ) {
   var radius = radiusAll;
-  late double cRadius;
+  double cRadius;
 
   final verticesCount = vertices.length;
   var p1 = vertices[verticesCount - 1];
@@ -74,7 +74,7 @@ Path roundedPoly(
     }
 
     if (p2.radius != null) {
-      radius = p2.radius!;
+      radius = p2.radius;
     } else {
       radius = radiusAll;
     }
@@ -134,7 +134,7 @@ Path roundedPath(
   double radiusAll,
 ) {
   var radius = radiusAll;
-  late double cRadius;
+  double cRadius;
 
   final verticesCount = vertices.length;
   var p1 = vertices[verticesCount - 1];
@@ -172,7 +172,7 @@ Path roundedPath(
     }
 
     if (p2.radius != null) {
-      radius = p2.radius!;
+      radius = p2.radius;
     } else {
       radius = radiusAll;
     }

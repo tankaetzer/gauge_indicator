@@ -18,14 +18,14 @@ abstract class GaugeAxisTransformer {
 
   /// Gradually displays the colors of the segments.
   const factory GaugeAxisTransformer.colorFadeIn({
-    required Interval interval,
+    @required Interval interval,
     Color background,
   }) = _ColorFadeIn;
 
   /// Uses segments to display gauge value.
   /// Can be used as a progress bar.
   const factory GaugeAxisTransformer.progress({
-    required Color color,
+    @required Color color,
     bool blendColors,
     bool reversed,
   }) = _ProgressTransformer;
@@ -63,7 +63,7 @@ class _ColorFadeIn extends GaugeAxisTransformer {
   final Color background;
 
   const _ColorFadeIn({
-    required this.interval,
+    @required this.interval,
     this.background = Colors.transparent,
   });
 
@@ -99,7 +99,7 @@ class _ProgressTransformer extends GaugeAxisTransformer {
   final Color color;
 
   const _ProgressTransformer({
-    required this.color,
+    @required this.color,
     this.blendColors = false,
     this.reversed = false,
   });

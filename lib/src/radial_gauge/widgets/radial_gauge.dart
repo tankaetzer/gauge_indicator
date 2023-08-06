@@ -6,7 +6,7 @@ import 'package:gauge_indicator/gauge_indicator.dart';
 /// Renders a radial gauge.
 class RadialGauge extends SingleChildRenderObjectWidget {
   final double value;
-  final double? radius;
+  final double radius;
 
   /// For now we are only supporting single axis.
   final GaugeAxis axis;
@@ -14,13 +14,13 @@ class RadialGauge extends SingleChildRenderObjectWidget {
   final bool debug;
 
   const RadialGauge({
-    required this.value,
-    required this.axis,
+    @required this.value,
+    @required this.axis,
     this.radius,
     this.alignment = Alignment.center,
     this.debug = false,
-    Widget? child,
-    Key? key,
+    Widget child,
+    Key key,
   }) : super(key: key, child: child);
 
   @override

@@ -12,7 +12,7 @@ abstract class GaugeLabelProvider {
 
   /// Maps a numeric value to the label.
   const factory GaugeLabelProvider.map({
-    required ToLabel toLabel,
+    @required ToLabel toLabel,
   }) = MapLabelProvider;
 
   /// Returns a label from the matching [LabelCategory]
@@ -47,7 +47,7 @@ class MapLabelProvider extends GaugeLabelProvider {
   final ToLabel toLabel;
 
   const MapLabelProvider({
-    required this.toLabel,
+    @required this.toLabel,
   });
 
   @override
@@ -98,12 +98,12 @@ class CategoryLabelProvider extends GaugeLabelProvider {
 /// obtained value into a label.
 class RadialGaugeLabel extends StatelessWidget {
   final double value;
-  final TextStyle? style;
+  final TextStyle style;
   final GaugeLabelProvider labelProvider;
 
   const RadialGaugeLabel({
-    Key? key,
-    required this.value,
+    Key key,
+    @required this.value,
     this.style,
     this.labelProvider = const GaugeLabelProvider.value(),
   }) : super(key: key);

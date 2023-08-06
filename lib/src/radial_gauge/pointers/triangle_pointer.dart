@@ -16,20 +16,20 @@ class TrianglePointer extends Equatable implements GaugePointer {
       ], borderRadius);
 
   @override
-  final Color? color;
+  final Color color;
   @override
   final GaugePointerPosition position;
   @override
-  final GaugePointerBorder? border;
+  final GaugePointerBorder border;
   final double borderRadius;
   @override
-  final Gradient? gradient;
+  final Gradient gradient;
   @override
-  final Shadow? shadow;
+  final Shadow shadow;
 
   const TrianglePointer({
-    required this.width,
-    required this.height,
+    @required this.width,
+    @required this.height,
     this.color,
     this.position = const GaugePointerPosition.surface(),
     this.borderRadius = 2,
@@ -43,5 +43,5 @@ class TrianglePointer extends Equatable implements GaugePointer {
         );
 
   @override
-  List<Object?> get props => [size, color, border, borderRadius, position];
+  List<Object> get props => [size, color, border, borderRadius, position];
 }

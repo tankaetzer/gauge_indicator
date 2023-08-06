@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:gauge_indicator/gauge_indicator.dart';
 
 class GaugeRoundedProgressBar extends Equatable implements GaugeProgressBar {
-  final Color? color;
-  final GaugeAxisGradient? gradient;
-  final Shader? shader;
+  final Color color;
+  final GaugeAxisGradient gradient;
+  final Shader shader;
   @override
   final GaugeProgressPlacement placement;
 
@@ -38,7 +38,7 @@ class GaugeRoundedProgressBar extends Equatable implements GaugeProgressBar {
     final paint = Paint()..style = PaintingStyle.fill;
 
     if (shader != null) {
-      paint.shader = shader!;
+      paint.shader = shader;
     } else if (gradient != null) {
       const rotationDifference = 270;
       final degrees = axis.degrees.clamp(10.0, 360.0);
@@ -46,20 +46,20 @@ class GaugeRoundedProgressBar extends Equatable implements GaugeProgressBar {
 
       paint.shader = ui.Gradient.sweep(
         layout.circleRect.center,
-        gradient!.colors,
-        gradient!.colorStops,
-        gradient!.tileMode,
+        gradient.colors,
+        gradient.colorStops,
+        gradient.tileMode,
         0.0,
         toRadians(axis.degrees),
         GradientRotation(rotationAngle).transform(layout.circleRect).storage,
       );
     } else if (color != null) {
-      paint.color = color!;
+      paint.color = color;
     }
 
     canvas.drawPath(progressBar, paint);
   }
 
   @override
-  List<Object?> get props => [color, gradient, shader, placement];
+  List<Object> get props => [color, gradient, shader, placement];
 }
